@@ -12,7 +12,8 @@ import CTA from '@/components/sections/cta'
 
 export default function Home() {
   return (
-    <main className="min-h-screen overflow-x-hidden w-full flex flex-col">
+    <main className="relative z-[2] min-h-screen overflow-x-hidden w-full flex flex-col">
+      <div className="noise-overlay" aria-hidden />
       <Navbar />
       <Hero />
       <About />

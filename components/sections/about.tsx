@@ -1,9 +1,45 @@
 'use client'
 
+import type { ReactNode } from 'react'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
+import { CheckCircle2, Users2, ShieldCheck, Rocket, Briefcase, Leaf } from 'lucide-react'
 import SectionHeading from '@/components/common/section-heading'
 import GlassCard from '@/components/common/glass-card'
+import { useScrollActive } from '@/hooks/use-scroll-active'
+
+function GlassHoverCard({ children, className = '' }: { children: ReactNode; className?: string }) {
+  const { ref, isInView } = useScrollActive()
+  return (
+    <div ref={ref} className="group" data-mobile-active={isInView}>
+      <GlassCard
+        hover
+        className={`group-data-[mobile-active=true]:border-primary/40 group-data-[mobile-active=true]:bg-white/10 ${className}`}
+      >
+        {children}
+      </GlassCard>
+    </div>
+  )
+}
+
+function AboutHeroImage() {
+  const { ref, isInView } = useScrollActive()
+  return (
+    <motion.div
+      ref={ref}
+      variants={fadeIn}
+      className="lg:col-span-7 h-[400px] lg:h-full relative rounded-3xl overflow-hidden glass shadow-sm group"
+      data-mobile-active={isInView}
+    >
+      <Image
+        src="/images/team-workspace.jpg"
+        alt="Our expert team"
+        fill
+        className="object-cover transition-transform duration-700 group-hover:scale-105 group-data-[mobile-active=true]:scale-105"
+      />
+    </motion.div>
+  )
+}
 
 const fadeIn = {
   hidden: { opacity: 0, y: 30 },
@@ -44,10 +80,44 @@ const About = () => {
     },
   ]
 
+  const whyChooseUs = [
+    {
+      title: 'Proven Track Record',
+      description: 'Hundreds of successful projects delivered on time and within budget',
+      icon: CheckCircle2,
+    },
+    {
+      title: 'Expert Team',
+      description: 'Skilled professionals with decades of combined experience',
+      icon: Users2,
+    },
+    {
+      title: 'Quality Assurance',
+      description: 'Rigorous quality control at every stage of construction',
+      icon: ShieldCheck,
+    },
+    {
+      title: 'Innovation Focus',
+      description: 'Latest technologies and methods for optimal results',
+      icon: Rocket,
+    },
+    {
+      title: 'Client-Centric',
+      description: 'Your needs are our priority from start to finish',
+      icon: Briefcase,
+    },
+    {
+      title: 'Sustainable',
+      description: 'Environmentally responsible construction practices',
+      icon: Leaf,
+    },
+  ]
+
   return (
-    <section id="about" className="py-24 relative overflow-hidden">
-      {/* Background Decorative Blob */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full filter blur-3xl pointer-events-none" />
+    <section id="about" className="section-y relative overflow-hidden bg-background">
+      <div className="section-ambient">
+        <div className="absolute top-0 right-0 h-96 w-96 rounded-full bg-primary/6 blur-[100px] dark:bg-primary/5" />
+      </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div 
@@ -73,15 +143,7 @@ const About = () => {
           variants={staggerContainer}
           className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-24"
         >
-          {/* Main Hero Image Block */}
-          <motion.div variants={fadeIn} className="lg:col-span-7 h-[400px] lg:h-full relative rounded-3xl overflow-hidden glass shadow-sm">
-            <Image
-              src="/images/team-workspace.jpg"
-              alt="Our expert team"
-              fill
-              className="object-cover transition-transform duration-700 hover:scale-105"
-            />
-          </motion.div>
+          <AboutHeroImage />
 
           {/* Right Cards Stack */}
           <motion.div variants={fadeIn} className="lg:col-span-5 flex flex-col gap-6">
@@ -115,7 +177,7 @@ const About = () => {
         >
           {highlights.map((item, index) => (
             <motion.div key={index} variants={fadeIn}>
-              <GlassCard hover className="h-full rounded-2xl p-6 bg-background/50 border border-border transition-all duration-300">
+              <GlassHoverCard className="h-full rounded-2xl p-6 bg-background/50 border border-border transition-all duration-300">
                 <div className="flex flex-col items-start gap-4">
                   <div className="flex items-center justify-center h-14 w-14 rounded-full bg-primary/10 text-primary">
                     <span className="font-bold text-xl">{item.number.charAt(0)}</span>
@@ -126,7 +188,7 @@ const About = () => {
                     <p className="text-muted-foreground text-sm leading-relaxed">{item.description}</p>
                   </div>
                 </div>
-              </GlassCard>
+              </GlassHoverCard>
             </motion.div>
           ))}
         </motion.div>
@@ -154,52 +216,24 @@ const About = () => {
             variants={staggerContainer}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-16"
           >
-            {[
-              {
-                title: 'Proven Track Record',
-                description: 'Hundreds of successful projects delivered on time and within budget',
-                icon: '✓',
-              },
-              {
-                title: 'Expert Team',
-                description: 'Skilled professionals with decades of combined experience',
-                icon: '👥',
-              },
-              {
-                title: 'Quality Assurance',
-                description: 'Rigorous quality control at every stage of construction',
-                icon: '⭐',
-              },
-              {
-                title: 'Innovation Focus',
-                description: 'Latest technologies and methods for optimal results',
-                icon: '🚀',
-              },
-              {
-                title: 'Client-Centric',
-                description: 'Your needs are our priority from start to finish',
-                icon: '💼',
-              },
-              {
-                title: 'Sustainable',
-                description: 'Environmentally responsible construction practices',
-                icon: '🌱',
-              },
-            ].map((item, index) => (
-              <motion.div key={index} variants={fadeIn}>
-                <GlassCard hover className="h-full p-8 rounded-2xl bg-background/50 border border-border">
-                  <div className="text-4xl mb-6 bg-primary/10 w-16 h-16 rounded-2xl flex items-center justify-center">
-                    {item.icon}
-                  </div>
-                  <h3 className="font-playfair text-xl font-bold text-foreground mb-3">
-                    {item.title}
-                  </h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    {item.description}
-                  </p>
-                </GlassCard>
-              </motion.div>
-            ))}
+            {whyChooseUs.map((item, index) => {
+              const Icon = item.icon
+              return (
+                <motion.div key={index} variants={fadeIn}>
+                  <GlassHoverCard className="h-full p-8 rounded-2xl bg-background/50 border border-border">
+                    <div className="mb-6 bg-primary/10 w-16 h-16 rounded-2xl flex items-center justify-center text-primary">
+                      <Icon className="w-8 h-8" />
+                    </div>
+                    <h3 className="font-playfair text-xl font-bold text-foreground mb-3">
+                      {item.title}
+                    </h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                      {item.description}
+                    </p>
+                  </GlassHoverCard>
+                </motion.div>
+              )
+            })}
           </motion.div>
         </div>
       </div>

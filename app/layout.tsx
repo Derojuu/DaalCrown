@@ -42,7 +42,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${playfairDisplay.variable} ${inter.variable}`} suppressHydrationWarning>
-      <body className="font-sans antialiased overflow-x-hidden">
+      <body className="font-sans antialiased overflow-x-hidden selection:bg-primary/20 selection:text-foreground">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>

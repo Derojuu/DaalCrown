@@ -40,10 +40,10 @@ const Navbar = () => {
         transition={{ duration: 0.35, ease: "easeInOut" }}
         className="fixed top-4 inset-x-0 z-50 mx-auto max-w-6xl w-[calc(100%-2rem)]"
       >
-        <div className="glass rounded-full px-6 py-3 flex items-center justify-between border border-border/50 bg-background/60 backdrop-blur-xl shadow-lg transition-colors">
+        <div className="flex items-center justify-between rounded-full border border-border/50 bg-background/75 px-5 py-2.5 shadow-[0_8px_40px_rgba(0,0,0,0.06)] backdrop-blur-2xl transition-colors dark:border-white/[0.08] dark:bg-background/55 dark:shadow-[0_12px_48px_rgba(0,0,0,0.55)] sm:px-6 sm:py-3">
           {/* Logo */}
           <a href="#" className="flex items-center gap-3">
-            <div className="w-10 h-10 relative">
+            <div className="w-16 h-16 sm:w-20 sm:h-20 relative shrink-0">
               <Image
                 src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/daal%20crown%20bg%20removed-JoSVsbnqjBqVSliTmKYONApuNPXWDZ.png"
                 alt="Daal Crown King Ltd Logo"
@@ -111,13 +111,24 @@ const Navbar = () => {
       {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
-            transition={{ duration: 0.2 }}
-            className="fixed top-24 inset-x-4 z-40 md:hidden"
-          >
+          <>
+            {/* Backdrop Blur behind the menu */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 z-40 bg-background/50 backdrop-blur-md md:hidden"
+              onClick={() => setIsMobileMenuOpen(false)}
+            />
+            {/* Menu Content */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.2 }}
+              className="fixed top-24 inset-x-4 z-50 md:hidden"
+            >
             <div className="glass rounded-2xl p-6 flex flex-col gap-4 bg-background/80 backdrop-blur-2xl border border-border shadow-2xl">
               {navLinks.map((link) => (
                 <a
@@ -137,7 +148,8 @@ const Navbar = () => {
                 Get In Touch
               </button>
             </div>
-          </motion.div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </>

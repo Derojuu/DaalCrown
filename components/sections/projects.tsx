@@ -1,19 +1,13 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState } from 'react'
 import Image from 'next/image'
-import { motion, AnimatePresence, useInView } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import SectionHeading from '@/components/common/section-heading'
+import { useScrollActive } from '@/hooks/use-scroll-active'
 
 const ProjectCard = ({ project }: { project: any }) => {
-  const ref = useRef<HTMLDivElement>(null)
-  // Triggers reliably when 40% of the card is visible in the viewport
-  const isInView = useInView(ref, { amount: 0.4 })
-
-  // Active class is applied if hovered (handled by Tailwind group-hover) OR if in view on a touch device.
-  // We use standard tailwind group-hover for desktop, and for mobile we forcibly apply the state when fully in view.
-  // A clean way is to conditionally add a class that mimics the hover state on mobile.
-  const mobileActive = isInView ? "data-[mobile-active=true]" : ""
+  const { ref, isInView } = useScrollActive()
 
   return (
     <motion.div
@@ -137,10 +131,9 @@ const Projects = () => {
       : projects.filter((p) => p.category === selectedCategory)
 
   return (
-    <section id="projects" className="py-24 relative overflow-hidden bg-secondary/30">
-      {/* Background Decor */}
-      <div className="absolute inset-0 opacity-20 pointer-events-none">
-        <div className="absolute bottom-1/4 -right-1/4 w-[800px] h-[800px] bg-primary/10 rounded-full filter blur-[150px]" />
+    <section id="projects" className="section-y relative overflow-hidden bg-muted/25 dark:bg-muted/10">
+      <div className="section-ambient">
+        <div className="absolute -right-1/4 bottom-1/4 h-[min(100vw,50rem)] w-[min(100vw,50rem)] rounded-full bg-primary/10 blur-[150px] dark:bg-primary/8" />
       </div>
 
       <div className="relative z-10 w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">

@@ -1,5 +1,3 @@
-import React from 'react';
-
 const Footer = () => {
   const currentYear = new Date().getFullYear()
 
@@ -25,49 +23,54 @@ const Footer = () => {
   }
 
   return (
-    <footer className="bg-background border-t border-border/50 pt-24 pb-12 overflow-hidden">
-      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Massive CTA */}
-        <div className="mb-24 flex flex-col items-center justify-center text-center">
-          <h2 className="font-playfair text-6xl md:text-8xl lg:text-9xl font-bold text-foreground tracking-tighter mb-8">
-            Let's <span className="text-primary italic">Build.</span>
+    <footer className="overflow-hidden border-t border-border/40 bg-muted/20 pb-12 pt-24 dark:bg-[#060606] md:pt-32">
+      <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
+        <div className="mb-20 flex flex-col items-center justify-center text-center md:mb-28">
+          <p className="eyebrow mb-6">Daal Crown King Ltd</p>
+          <h2 className="mb-10 max-w-5xl font-playfair text-5xl font-bold tracking-tighter text-foreground sm:text-6xl md:text-7xl lg:text-8xl">
+            Let&apos;s{' '}
+            <span className="text-gradient italic">
+              Build.
+            </span>
           </h2>
-          <button className="px-10 py-5 bg-primary text-primary-foreground rounded-full text-lg font-bold hover:scale-105 transition-transform duration-300 shadow-xl shadow-primary/20">
+          <button className="rounded-full bg-primary px-12 py-5 text-lg font-bold text-primary-foreground shadow-2xl shadow-primary/25 transition-transform duration-300 hover:scale-[1.03] hover:bg-primary/90">
             Start Your Project
           </button>
         </div>
 
         {/* Footer Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
-          {/* Brand Section */}
-          <div className="md:col-span-5 lg:col-span-4 pr-8">
-            <h3 className="font-playfair text-3xl font-bold text-primary mb-6">
-              DAAL CROWN
-            </h3>
-            <p className="text-muted-foreground text-lg leading-relaxed mb-8">
+        <div className="mb-16 grid grid-cols-1 gap-12 md:grid-cols-12">
+          <div className="pr-0 md:col-span-5 md:pr-8 lg:col-span-4">
+            <h3 className="mb-6 font-playfair text-3xl font-bold tracking-tight text-primary">DAAL CROWN</h3>
+            <p className="mb-8 text-lg leading-relaxed text-muted-foreground">
               Building excellence through innovation, integrity, and an unwavering commitment to quality structural development.
             </p>
-            <div className="flex gap-4">
-              <a href="#" className="w-12 h-12 rounded-full border border-border flex items-center justify-center text-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300">
+            <div className="flex gap-3">
+              <a
+                href="#"
+                className="flex h-12 w-12 items-center justify-center rounded-full border border-border/60 text-foreground transition-all duration-300 hover:border-primary hover:bg-primary hover:text-primary-foreground"
+              >
                 <span className="font-bold">in</span>
               </a>
-              <a href="#" className="w-12 h-12 rounded-full border border-border flex items-center justify-center text-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300">
+              <a
+                href="#"
+                className="flex h-12 w-12 items-center justify-center rounded-full border border-border/60 text-foreground transition-all duration-300 hover:border-primary hover:bg-primary hover:text-primary-foreground"
+              >
                 <span className="font-bold">𝕏</span>
               </a>
-              <a href="#" className="w-12 h-12 rounded-full border border-border flex items-center justify-center text-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300">
+              <a
+                href="#"
+                className="flex h-12 w-12 items-center justify-center rounded-full border border-border/60 text-foreground transition-all duration-300 hover:border-primary hover:bg-primary hover:text-primary-foreground"
+              >
                 <span className="font-bold">f</span>
               </a>
             </div>
           </div>
 
-          {/* Links Sections */}
-          <div className="md:col-span-7 lg:col-span-8 grid grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-2 gap-8 md:col-span-7 lg:col-span-8 lg:grid-cols-3">
             {Object.entries(footerLinks).map(([title, links]) => (
               <div key={title}>
-                <h4 className="text-sm uppercase tracking-widest font-semibold text-foreground mb-6">
-                  {title}
-                </h4>
+                <h4 className="mb-5 text-xs font-semibold uppercase tracking-[0.2em] text-foreground">{title}</h4>
                 <ul className="space-y-4">
                   {links.map((link) => (
                     <li key={link.label}>
@@ -85,8 +88,7 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Divider */}
-        <div className="border-t border-border/50 mb-8" />
+        <div className="mb-8 border-t border-border/40" />
 
         {/* Bottom Section */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">

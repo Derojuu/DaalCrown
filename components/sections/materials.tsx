@@ -2,9 +2,56 @@
 
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import { Package, ShoppingCart, Zap, TrendingUp } from 'lucide-react'
+import { Package, ShoppingCart, Zap, TrendingUp, type LucideIcon } from 'lucide-react'
 import SectionHeading from '@/components/common/section-heading'
 import GlassCard from '@/components/common/glass-card'
+import { useScrollActive } from '@/hooks/use-scroll-active'
+
+type Category = {
+  id: number
+  name: string
+  image: string
+  items: string
+  icon: LucideIcon
+}
+
+function MaterialCategoryCard({ category }: { category: Category }) {
+  const { ref, isInView } = useScrollActive()
+  return (
+    <motion.div variants={itemVariants}>
+      <div ref={ref} className="group h-full" data-mobile-active={isInView}>
+        <GlassCard className="h-full overflow-hidden rounded-3xl border-border/50 transition-transform duration-300 group-hover:scale-105 group-data-[mobile-active=true]:scale-105 group-data-[mobile-active=true]:border-primary/40 group-data-[mobile-active=true]:bg-white/10">
+          <div className="relative h-48 w-full mb-4 rounded-lg overflow-hidden">
+            <Image
+              src={category.image}
+              alt={category.name}
+              fill
+              className="object-cover group-hover:scale-110 group-data-[mobile-active=true]:scale-110 transition-transform duration-500"
+            />
+            <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 group-data-[mobile-active=true]:bg-black/20 transition-colors" />
+          </div>
+
+          <h3 className="font-playfair text-lg font-bold text-foreground mb-2">{category.name}</h3>
+
+          <p className="text-foreground/70 text-sm mb-4">{category.items}</p>
+
+          <button className="w-full px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors font-medium text-sm">
+            Shop Category
+          </button>
+        </GlassCard>
+      </div>
+    </motion.div>
+  )
+}
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5 },
+  },
+}
 
 const Materials = () => {
   const categories = [
@@ -71,21 +118,11 @@ const Materials = () => {
     },
   }
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5 },
-    },
-  }
-
   return (
-    <section id="materials" className="py-24 relative">
-      {/* Background Elements */}
-      <div className="absolute inset-0 opacity-20 pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full filter blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-primary/10 rounded-full filter blur-3xl" />
+    <section id="materials" className="section-y relative overflow-hidden bg-background">
+      <div className="section-ambient">
+        <div className="absolute top-0 left-1/4 h-96 w-96 rounded-full bg-primary/8 blur-[100px] dark:bg-primary/6" />
+        <div className="absolute right-1/4 bottom-0 h-96 w-96 rounded-full bg-primary/6 blur-[100px] dark:bg-primary/5" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -108,29 +145,7 @@ const Materials = () => {
           viewport={{ once: true }}
         >
           {categories.map((category) => (
-            <motion.div key={category.id} variants={itemVariants}>
-              <GlassCard className="overflow-hidden h-full hover:scale-105 transition-transform duration-300">
-                <div className="relative h-48 w-full mb-4 rounded-lg overflow-hidden">
-                  <Image
-                    src={category.image}
-                    alt={category.name}
-                    fill
-                    className="object-cover hover:scale-110 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-black/40 hover:bg-black/20 transition-colors" />
-                </div>
-
-                <h3 className="font-playfair text-lg font-bold text-foreground mb-2">
-                  {category.name}
-                </h3>
-
-                <p className="text-foreground/70 text-sm mb-4">{category.items}</p>
-
-                <button className="w-full px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors font-medium text-sm">
-                  Shop Category
-                </button>
-              </GlassCard>
-            </motion.div>
+            <MaterialCategoryCard key={category.id} category={category} />
           ))}
         </motion.div>
 

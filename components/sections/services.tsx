@@ -76,9 +76,11 @@ const Services = () => {
   ]
 
   return (
-    <section id="services" className="py-24 relative overflow-hidden bg-background">
-      {/* Background Decor */}
-      <div className="absolute top-1/4 -left-64 w-96 h-96 bg-primary/5 rounded-full filter blur-[100px] pointer-events-none" />
+    <section id="services" className="section-y relative overflow-hidden bg-muted/30 dark:bg-muted/10">
+      <div className="section-ambient">
+        <div className="absolute top-1/4 -left-64 h-[28rem] w-[28rem] rounded-full bg-primary/10 blur-[120px] dark:bg-primary/[0.07]" />
+        <div className="absolute bottom-0 right-0 h-80 w-80 rounded-full bg-primary/[0.06] blur-[100px] dark:bg-primary/5" />
+      </div>
 
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
@@ -86,7 +88,7 @@ const Services = () => {
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={itemVariants}
-          className="mb-16"
+          className="mb-20 md:mb-24"
         >
           <SectionHeading
             subtitle="What We Offer"
@@ -110,8 +112,10 @@ const Services = () => {
             return (
               <motion.div key={service.id} variants={itemVariants} className="h-full">
                 <GlassCard 
-                  className={`h-full cursor-pointer transition-all duration-300 border ${
-                    isExpanded ? 'border-primary shadow-xl bg-background shadow-primary/10' : 'border-border/50 hover:border-primary/50 bg-background/50'
+                  className={`h-full cursor-pointer rounded-3xl transition-all duration-500 border shadow-lg shadow-black/[0.03] dark:shadow-black/40 ${
+                    isExpanded
+                      ? 'border-primary bg-card shadow-xl shadow-primary/15 ring-1 ring-primary/20'
+                      : 'border-border/60 bg-card/80 hover:border-primary/40 hover:shadow-xl dark:bg-card/50'
                   }`}
                   onClick={() => setExpandedService(isExpanded ? null : service.id)}
                 >
