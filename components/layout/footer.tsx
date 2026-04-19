@@ -40,16 +40,19 @@ const Footer = () => {
       <div className="mx-auto max-w-[1600px] px-4 py-16 sm:px-6 lg:px-10 lg:py-20">
         <div className="grid gap-12 border-b border-white/10 pb-14 lg:grid-cols-12">
           <div className="lg:col-span-5">
-            <div className="mb-6 flex items-center gap-3">
-              <div className="relative h-12 w-12">
+            <div className="mb-6 flex items-center gap-3.5 sm:gap-4">
+              <div className="relative h-14 w-14 shrink-0 sm:h-16 sm:w-16">
                 <Image
                   src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/daal%20crown%20bg%20removed-JoSVsbnqjBqVSliTmKYONApuNPXWDZ.png"
                   alt=""
                   fill
-                  className="object-contain brightness-0 invert"
+                  className="object-contain"
+                  sizes="(max-width: 640px) 56px, 64px"
                 />
               </div>
-              <span className="font-heading text-xl font-bold uppercase tracking-[0.14em]">Daal Crown King Ltd</span>
+              <span className="font-heading text-xl font-bold uppercase tracking-[0.14em] sm:text-2xl">
+                Daal Crown King Ltd
+              </span>
             </div>
             <p className="max-w-md text-sm leading-relaxed text-white/75">
               Extraordinary teams delivering complex construction, rehabilitation, and materials programs—with the
