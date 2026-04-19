@@ -1,188 +1,125 @@
 'use client'
 
-import { useState } from 'react'
+import { useRef } from 'react'
 import Image from 'next/image'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 import SectionHeading from '@/components/common/section-heading'
-import { useScrollActive } from '@/hooks/use-scroll-active'
 
-const ProjectCard = ({ project }: { project: any }) => {
-  const { ref, isInView } = useScrollActive()
-
-  return (
-    <motion.div
-      ref={ref}
-      layout
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.9 }}
-      transition={{ duration: 0.4 }}
-      className="w-full max-w-[500px] mx-auto"
-      data-mobile-active={isInView}
-    >
-      <div className="group rounded-3xl overflow-hidden bg-background border border-border/60 hover:border-primary/50 data-[mobile-active=true]:border-primary/50 transition-colors duration-500 shadow-xl shadow-black/5 hover:shadow-2xl data-[mobile-active=true]:shadow-primary/10 hover:shadow-primary/10">
-        <div className="relative h-[250px] sm:h-[300px] w-full overflow-hidden">
-          <Image
-            src={project.image}
-            alt={project.title}
-            fill
-            className="object-cover group-hover:scale-105 data-[mobile-active=true]:scale-105 transition-transform duration-700 ease-out"
-          />
-          <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 data-[mobile-active=true]:opacity-100 transition-opacity duration-500 flex items-center justify-center">
-            <button className="px-6 py-3 bg-primary text-primary-foreground font-semibold rounded-full transform translate-y-4 group-hover:translate-y-0 data-[mobile-active=true]:translate-y-0 transition-all duration-300">
-              View Project
-            </button>
-          </div>
-          {/* Badge */}
-          <div className="absolute top-4 left-4 px-4 py-1.5 bg-background/90 backdrop-blur text-foreground text-xs font-bold rounded-full shadow-sm">
-            {project.completion}
-          </div>
-        </div>
-
-        <div className="p-8">
-          <h3 className="font-playfair text-2xl font-bold text-foreground mb-3 group-hover:text-primary data-[mobile-active=true]:text-primary transition-colors">
-            {project.title}
-          </h3>
-          
-          <div className="flex items-center gap-2 text-muted-foreground text-sm font-medium mb-4">
-            <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-            <span>{project.location}</span>
-          </div>
-
-          <p className="text-muted-foreground text-sm leading-relaxed">
-            {project.details}
-          </p>
-        </div>
-      </div>
-    </motion.div>
-  )
-}
+const projects = [
+  {
+    title: 'Metro mobility program',
+    place: 'Middle East',
+    image:
+      'https://images.unsplash.com/photo-1544984241-ec57ea16fe25?auto=format&fit=crop&w=1200&q=80',
+    detail: 'Large-scale transit infrastructure delivered with integrated systems commissioning.',
+  },
+  {
+    title: 'Energy expansion campus',
+    place: 'North America',
+    image:
+      'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=1200&q=80',
+    detail: 'Complex industrial delivery with rigorous QA and schedule protection.',
+  },
+  {
+    title: 'Regional airport modernization',
+    place: 'Asia Pacific',
+    image:
+      'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1200&q=80',
+    detail: 'High-traffic aviation work with phased operations and safety-first sequencing.',
+  },
+  {
+    title: 'Water treatment resilience upgrade',
+    place: 'Europe',
+    image:
+      'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=1200&q=80',
+    detail: 'Critical infrastructure rehabilitation with minimal service disruption.',
+  },
+  {
+    title: 'Advanced manufacturing facility',
+    place: 'United States',
+    image:
+      'https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=1200&q=80',
+    detail: 'Greenfield delivery combining structural, MEP coordination, and startup support.',
+  },
+]
 
 const Projects = () => {
-  const [selectedCategory, setSelectedCategory] = useState('all')
+  const scroller = useRef<HTMLDivElement>(null)
 
-  const projects = [
-    {
-      id: 1,
-      category: 'residential',
-      title: 'Luxury Residential Complex',
-      location: 'Downtown District',
-      image: '/images/project-residential.jpg',
-      completion: '2023',
-      details: 'Modern apartment complex with premium amenities and state-of-the-art facilities',
-    },
-    {
-      id: 2,
-      category: 'commercial',
-      title: 'Business Tower Development',
-      location: 'Central Plaza',
-      image: '/images/project-commercial.jpg',
-      completion: '2023',
-      details: 'State-of-the-art office building with sustainable design and smart technology',
-    },
-    {
-      id: 3,
-      category: 'infrastructure',
-      title: 'Highway Expansion Project',
-      location: 'Metropolitan Area',
-      image: '/images/infrastructure.jpg',
-      completion: '2022',
-      details: 'Multi-lane highway infrastructure upgrade with modern engineering',
-    },
-    {
-      id: 4,
-      category: 'residential',
-      title: 'Waterfront Residences',
-      location: 'Harbor View',
-      image: '/images/project-residential.jpg',
-      completion: '2023',
-      details: 'Luxury beachfront residential development with panoramic views',
-    },
-    {
-      id: 5,
-      category: 'commercial',
-      title: 'Shopping District Mall',
-      location: 'Retail Zone',
-      image: '/images/project-commercial.jpg',
-      completion: '2022',
-      details: 'Modern shopping and entertainment complex with premium retail spaces',
-    },
-    {
-      id: 6,
-      category: 'infrastructure',
-      title: 'Bridge Engineering Project',
-      location: 'River District',
-      image: '/images/infrastructure.jpg',
-      completion: '2023',
-      details: 'Architectural bridge connecting communities with innovative design',
-    },
-  ]
-
-  const categories = [
-    { value: 'all', label: 'All Projects' },
-    { value: 'residential', label: 'Residential' },
-    { value: 'commercial', label: 'Commercial' },
-    { value: 'infrastructure', label: 'Infrastructure' },
-  ]
-
-  const filteredProjects =
-    selectedCategory === 'all'
-      ? projects
-      : projects.filter((p) => p.category === selectedCategory)
+  const scrollByDir = (dir: number) => {
+    scroller.current?.scrollBy({ left: dir * 420, behavior: 'smooth' })
+  }
 
   return (
-    <section id="projects" className="section-y relative overflow-hidden bg-muted/25 dark:bg-muted/10">
-      <div className="section-ambient">
-        <div className="absolute -right-1/4 bottom-1/4 h-[min(100vw,50rem)] w-[min(100vw,50rem)] rounded-full bg-primary/10 blur-[150px] dark:bg-primary/8" />
-      </div>
-
-      <div className="relative z-10 w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-          className="mb-12 cursor-default"
-        >
-          <SectionHeading
-            subtitle="Our Portfolio"
-            title="Featured Projects"
-            description="Showcasing excellence in every construction endeavor"
-            centered
-          />
-        </motion.div>
-
-        {/* Category Filter */}
-        <motion.div 
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex flex-wrap items-center justify-center gap-3 mb-16"
-        >
-          {categories.map((category) => (
-            <button
-              key={category.value}
-              onClick={() => setSelectedCategory(category.value)}
-              className={`px-6 py-2.5 rounded-full font-semibold text-sm transition-all duration-300 ${
-                selectedCategory === category.value
-                  ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/20 scale-105'
-                  : 'bg-background text-foreground/70 border border-border/50 hover:border-primary/50'
-              }`}
+    <section id="projects" className="section-y border-b border-border bg-background">
+      <div className="mx-auto max-w-[1600px] px-4 sm:px-6 lg:px-10">
+        <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
+          <div className="max-w-3xl">
+            <SectionHeading
+              subtitle="Featured work"
+              title="Projects that raise the bar"
+              description="A snapshot of the kinds of programs we support—complex, consequential, and delivered with integrated teams."
+              centered={false}
+            />
+          </div>
+          <div className="flex gap-2 self-end">
+            <button suppressHydrationWarning
+              type="button"
+              className="flex h-11 w-11 items-center justify-center border border-border bg-background text-foreground transition hover:border-accent"
+              aria-label="Previous"
+              onClick={() => scrollByDir(-1)}
             >
-              {category.label}
+              <ChevronLeft className="h-5 w-5" />
             </button>
-          ))}
-        </motion.div>
+            <button suppressHydrationWarning
+              type="button"
+              className="flex h-11 w-11 items-center justify-center border border-border bg-background text-foreground transition hover:border-accent"
+              aria-label="Next"
+              onClick={() => scrollByDir(1)}
+            >
+              <ChevronRight className="h-5 w-5" />
+            </button>
+          </div>
+        </div>
 
-        {/* Projects Grid */}
-        <motion.div layout className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-          <AnimatePresence mode="popLayout">
-            {filteredProjects.map((project) => (
-              <ProjectCard key={project.id} project={project} />
-            ))}
-          </AnimatePresence>
-        </motion.div>
+        <div
+          ref={scroller}
+          className="mt-12 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        >
+          {projects.map((project, i) => (
+            <motion.article
+              key={project.title}
+              initial={{ opacity: 0, x: 24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.04, duration: 0.4 }}
+              className="w-[min(100%,380px)] shrink-0 snap-start border border-border bg-card"
+            >
+              <div className="relative aspect-[4/3]">
+                <Image
+                  src={project.image}
+                  alt=""
+                  fill
+                  className="object-cover"
+                  sizes="380px"
+                />
+                <span className="absolute left-4 top-4 bg-navy-deep/90 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-white">
+                  {project.place}
+                </span>
+              </div>
+              <div className="p-6">
+                <h3 className="font-heading text-lg font-bold uppercase tracking-[0.06em] text-foreground">
+                  {project.title}
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{project.detail}</p>
+                <button suppressHydrationWarning type="button" className="mt-5 text-sm font-bold uppercase tracking-[0.14em] text-primary">
+                  Project details
+                </button>
+              </div>
+            </motion.article>
+          ))}
+        </div>
       </div>
     </section>
   )

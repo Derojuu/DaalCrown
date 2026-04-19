@@ -11,7 +11,8 @@ const config = {
     extend: {
       fontFamily: {
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],
-        playfair: ["var(--font-playfair)", "Georgia", "serif"],
+        heading: ["var(--font-barlow)", "system-ui", "sans-serif"],
+        playfair: ["var(--font-barlow)", "system-ui", "sans-serif"],
       },
       colors: {
         background: "hsl(var(--background))",

@@ -2,152 +2,150 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
-import { motion, useScroll, useMotionValueEvent, AnimatePresence } from 'framer-motion'
+import Link from 'next/link'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Menu, X, ChevronDown, Search } from 'lucide-react'
 import ThemeToggle from '../common/theme-toggle'
 
+/* Mirrors Bechtel.com primary nav labels (Firecrawl); anchors map to our page sections */
+const NAV = [
+  { label: 'People', href: '#about' },
+  { label: 'Projects', href: '#projects' },
+  { label: 'Approach', href: '#services' },
+  { label: 'Careers', href: '#people' },
+  { label: 'Suppliers', href: '#materials' },
+  { label: 'Media', href: '#insights' },
+  { label: 'Impact', href: '#brand' },
+  { label: 'History', href: '#history' },
+] as const
+
+const scrollTo = (href: string) => {
+  document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' })
+}
+
 const Navbar = () => {
-  const [isHidden, setIsHidden] = useState(false)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const { scrollY } = useScroll()
-
-  // Hide navbar when scrolling down, show when scrolling up
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    const previous = scrollY.getPrevious() ?? 0;
-    if (latest > previous && latest > 150) {
-      setIsHidden(true);
-      setIsMobileMenuOpen(false);
-    } else {
-      setIsHidden(false);
-    }
-  });
-
-  const navLinks = [
-    { label: 'About', href: '#about' },
-    { label: 'Services', href: '#services' },
-    { label: 'Projects', href: '#projects' },
-    { label: 'Why Us', href: '#why-us' },
-    { label: 'Testimonials', href: '#testimonials' },
-  ]
+  const [open, setOpen] = useState(false)
 
   return (
     <>
-      <motion.nav
-        variants={{
-          visible: { y: 0, opacity: 1 },
-          hidden: { y: "-100%", opacity: 0 }
-        }}
-        animate={isHidden ? "hidden" : "visible"}
-        transition={{ duration: 0.35, ease: "easeInOut" }}
-        className="fixed top-4 inset-x-0 z-50 mx-auto max-w-6xl w-[calc(100%-2rem)]"
-      >
-        <div className="flex items-center justify-between rounded-full border border-border/50 bg-background/75 px-5 py-2.5 shadow-[0_8px_40px_rgba(0,0,0,0.06)] backdrop-blur-2xl transition-colors dark:border-white/[0.08] dark:bg-background/55 dark:shadow-[0_12px_48px_rgba(0,0,0,0.55)] sm:px-6 sm:py-3">
-          {/* Logo */}
-          <a href="#" className="flex items-center gap-3">
-            <div className="w-16 h-16 sm:w-20 sm:h-20 relative shrink-0">
+      <header className="sticky top-0 z-50 border-b border-border bg-background">
+        <div className="mx-auto flex h-[4.25rem] max-w-[1600px] items-center justify-between gap-3 px-4 sm:px-6 lg:gap-6 lg:px-8">
+          <Link
+            href="#"
+            className="flex min-w-0 shrink items-center gap-2.5 sm:gap-3"
+            onClick={(e) => {
+              e.preventDefault()
+              window.scrollTo({ top: 0, behavior: 'smooth' })
+            }}
+          >
+            <div className="relative h-10 w-10 shrink-0 sm:h-11 sm:w-11">
               <Image
                 src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/daal%20crown%20bg%20removed-JoSVsbnqjBqVSliTmKYONApuNPXWDZ.png"
-                alt="Daal Crown King Ltd Logo"
+                alt="Daal Crown King Ltd"
                 fill
                 className="object-contain"
+                priority
               />
             </div>
-            <span className="hidden sm:inline font-playfair text-xl font-bold text-foreground">
-              DAAL CROWN
+            <span className="font-heading text-[0.95rem] font-bold uppercase tracking-[0.14em] text-[#30454C] sm:text-base">
+              Daal Crown
             </span>
-          </a>
+          </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-6">
-            {navLinks.map((link) => (
-               <a
-                key={link.label}
-                href={link.href}
-                className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.querySelector(link.href)?.scrollIntoView({ behavior: 'smooth' });
-                }}
+          <nav
+            className="hidden max-w-[52rem] flex-1 flex-wrap items-center justify-center gap-x-0.5 lg:flex 2xl:max-w-none 2xl:gap-x-1"
+            aria-label="Primary"
+          >
+            {NAV.map((item) => (
+              <button suppressHydrationWarning
+                key={item.href}
+                type="button"
+                className="flex items-center gap-0.5 px-1.5 py-2 text-[10px] font-semibold uppercase tracking-[0.1em] text-[#30454C] transition hover:text-[#1a1f24] xl:px-2 xl:text-[11px] xl:tracking-[0.12em]"
+                onClick={() => scrollTo(item.href)}
               >
-                {link.label}
-              </a>
+                {item.label}
+                <ChevronDown className="h-3 w-3 shrink-0 opacity-45" aria-hidden />
+              </button>
             ))}
-          </div>
+          </nav>
 
-          {/* Right Actions */}
-          <div className="hidden md:flex items-center gap-3">
-            <ThemeToggle />
-            <button className="px-5 py-2.5 bg-primary text-primary-foreground rounded-full hover:bg-primary/90 transition-colors font-semibold text-sm">
-              Get In Touch
-            </button>
-          </div>
-
-          {/* Mobile Toggles */}
-          <div className="md:hidden flex items-center gap-3">
-            <ThemeToggle />
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="flex flex-col justify-center items-center w-8 h-8 focus:outline-none"
+          <div className="flex items-center gap-1.5 sm:gap-2">
+            <button suppressHydrationWarning
+              type="button"
+              className="hidden h-10 w-10 items-center justify-center text-[#30454C] transition hover:bg-muted lg:flex"
+              aria-label="Search"
             >
-              <span
-                className={`w-6 h-[2px] bg-foreground transition-all duration-300 ease-in-out ${
-                  isMobileMenuOpen ? 'rotate-45 translate-y-[6px]' : '-translate-y-1'
-                }`}
-              />
-              <span
-                className={`w-6 h-[2px] bg-foreground transition-all duration-300 ease-in-out ${
-                  isMobileMenuOpen ? 'opacity-0' : 'opacity-100'
-                }`}
-              />
-              <span
-                className={`w-6 h-[2px] bg-foreground transition-all duration-300 ease-in-out ${
-                  isMobileMenuOpen ? '-rotate-45 -translate-y-[6px]' : 'translate-y-1'
-                }`}
-              />
+              <Search className="h-[18px] w-[18px]" strokeWidth={2} />
+            </button>
+            <div className="hidden sm:block">
+              <ThemeToggle />
+            </div>
+            <button suppressHydrationWarning
+              type="button"
+              className="btn-corporate hidden px-4 py-2.5 text-[11px] tracking-[0.14em] md:inline-flex"
+              onClick={() => scrollTo('#contact')}
+            >
+              Contact
+            </button>
+            <button suppressHydrationWarning
+              type="button"
+              className="flex h-10 w-10 items-center justify-center border border-border text-[#30454C] lg:hidden"
+              onClick={() => setOpen(!open)}
+              aria-expanded={open}
+              aria-label="Menu"
+            >
+              {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
           </div>
         </div>
-      </motion.nav>
+      </header>
 
-      {/* Mobile Menu Overlay */}
       <AnimatePresence>
-        {isMobileMenuOpen && (
+        {open && (
           <>
-            {/* Backdrop Blur behind the menu */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="fixed inset-0 z-40 bg-background/50 backdrop-blur-md md:hidden"
-              onClick={() => setIsMobileMenuOpen(false)}
+              className="fixed inset-0 z-40 bg-[#30454C]/35 backdrop-blur-sm xl:hidden"
+              onClick={() => setOpen(false)}
             />
-            {/* Menu Content */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.2 }}
-              className="fixed top-24 inset-x-4 z-50 md:hidden"
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              className="fixed left-3 right-3 top-[4.5rem] z-50 max-h-[min(80vh,calc(100vh-5rem))] overflow-y-auto border border-border bg-background shadow-xl lg:hidden"
             >
-            <div className="glass rounded-2xl p-6 flex flex-col gap-4 bg-background/80 backdrop-blur-2xl border border-border shadow-2xl">
-              {navLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  className="block text-lg font-medium text-foreground py-2 border-b border-border/50 hover:text-primary transition-colors"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setIsMobileMenuOpen(false);
-                    document.querySelector(link.href)?.scrollIntoView({ behavior: 'smooth' });
+              <nav className="flex flex-col p-4">
+                {NAV.map((item) => (
+                  <button suppressHydrationWarning
+                    key={item.href}
+                    type="button"
+                    className="flex items-center justify-between border-b border-border/70 py-3.5 text-left text-[12px] font-semibold uppercase tracking-[0.14em] text-[#30454C]"
+                    onClick={() => {
+                      setOpen(false)
+                      scrollTo(item.href)
+                    }}
+                  >
+                    {item.label}
+                    <ChevronDown className="h-4 w-4 -rotate-90 opacity-40" aria-hidden />
+                  </button>
+                ))}
+                <button suppressHydrationWarning
+                  type="button"
+                  className="btn-corporate mt-4 w-full py-3.5 text-[12px]"
+                  onClick={() => {
+                    setOpen(false)
+                    scrollTo('#contact')
                   }}
                 >
-                  {link.label}
-                </a>
-              ))}
-              <button className="w-full mt-4 px-6 py-4 bg-primary text-primary-foreground rounded-full font-semibold hover:bg-primary/90 transition-colors">
-                Get In Touch
-              </button>
-            </div>
+                  Contact
+                </button>
+                <div className="mt-4 flex items-center justify-between border-t border-border pt-4">
+                  <span className="text-xs text-muted-foreground">Display</span>
+                  <ThemeToggle />
+                </div>
+              </nav>
             </motion.div>
           </>
         )}

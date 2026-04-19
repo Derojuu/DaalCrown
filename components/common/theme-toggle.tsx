@@ -41,6 +41,7 @@ const ThemeToggle = () => {
 
   return (
     <button
+      suppressHydrationWarning
       onClick={toggleTheme}
       className="p-2 rounded-lg hover:bg-primary/10 transition-colors text-foreground"
       aria-label="Toggle theme"

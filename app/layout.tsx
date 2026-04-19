@@ -1,21 +1,24 @@
 import type { Metadata } from 'next'
-import { Playfair_Display, Inter } from 'next/font/google'
+import { Barlow_Semi_Condensed, Inter } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
-const playfairDisplay = Playfair_Display({ 
+const barlow = Barlow_Semi_Condensed({
   subsets: ['latin'],
-  variable: '--font-playfair'
-});
-const inter = Inter({ 
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-barlow',
+})
+
+const inter = Inter({
   subsets: ['latin'],
-  variable: '--font-inter'
-});
+  variable: '--font-inter',
+})
 
 export const metadata: Metadata = {
-  title: 'Daal Crown King Ltd - Premium Construction & Infrastructure',
-  description: 'Discover excellence in construction and infrastructure development with Daal Crown King Ltd',
-  generator: 'v0.app',
+  title: 'Daal Crown King Ltd — Construction, Infrastructure & Materials',
+  description:
+    'Engineering-led construction, rehabilitation, and materials delivery—modeled on global EPC excellence for ambitious projects.',
+  generator: 'Next.js',
   icons: {
     icon: [
       {
@@ -41,8 +44,11 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${playfairDisplay.variable} ${inter.variable}`} suppressHydrationWarning>
-      <body className="font-sans antialiased overflow-x-hidden selection:bg-primary/20 selection:text-foreground">
+    <html lang="en" className={`${barlow.variable} ${inter.variable}`} suppressHydrationWarning>
+      <body
+        className="font-sans overflow-x-hidden selection:bg-accent/20 selection:text-foreground"
+        suppressHydrationWarning
+      >
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>

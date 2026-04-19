@@ -12,25 +12,15 @@ const SectionHeading = ({
   centered = true,
 }: SectionHeadingProps) => {
   return (
-    <div className={`space-y-5 ${centered ? 'text-center' : ''}`}>
-      {subtitle && (
-        <div className={`flex flex-wrap items-center gap-3 ${centered ? 'justify-center' : ''}`}>
-          <span
-            className={`h-px bg-gradient-to-r from-transparent to-primary/50 ${centered ? 'w-10 sm:w-16' : 'w-16'}`}
-            aria-hidden
-          />
-          <p className="eyebrow">{subtitle}</p>
-          <span
-            className={`h-px bg-gradient-to-l from-transparent to-primary/50 ${centered ? 'w-10 sm:w-16' : 'hidden'}`}
-            aria-hidden
-          />
-        </div>
-      )}
-      <h2 className="font-playfair text-4xl sm:text-5xl md:text-6xl font-bold text-foreground tracking-tight leading-[1.08] max-w-4xl mx-auto">
+    <div className={`max-w-4xl space-y-4 ${centered ? 'mx-auto text-center' : ''}`}>
+      {subtitle && <p className="eyebrow">{subtitle}</p>}
+      <h2 className="font-heading text-3xl font-bold uppercase tracking-[0.04em] text-foreground sm:text-4xl md:text-[2.75rem] md:leading-[1.1]">
         {title}
       </h2>
       {description && (
-        <p className="text-muted-foreground text-base sm:text-lg leading-relaxed max-w-2xl mx-auto pt-1 font-sans">
+        <p
+          className={`max-w-3xl pt-1 text-base leading-relaxed text-muted-foreground sm:text-lg ${centered ? 'mx-auto' : ''}`}
+        >
           {description}
         </p>
       )}

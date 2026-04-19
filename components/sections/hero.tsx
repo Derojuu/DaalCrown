@@ -1,146 +1,88 @@
 'use client'
 
-import { useRef } from 'react'
 import Image from 'next/image'
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion'
+import { motion } from 'framer-motion'
+
+const HERO_IMG =
+  'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=2400&q=80'
 
 const Hero = () => {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"]
-  })
-
-  // Smooth out the raw scroll values so parallax doesn't jitter on mobile
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001
-  })
-
-  // Parallax effects
-  const backgroundY = useTransform(smoothProgress, [0, 1], ["0%", "30%"])
-  const contentY = useTransform(smoothProgress, [0, 1], ["0%", "50%"])
-  const opacity = useTransform(smoothProgress, [0, 0.5], [1, 0])
-
   return (
-    <section 
-      ref={containerRef}
-      className="relative min-h-[100svh] w-full flex items-center justify-center overflow-hidden bg-background"
-    >
-      {/* Dynamic Background Image with Parallax */}
-      <motion.div 
-        style={{ y: backgroundY }}
-        className="absolute -top-[20%] left-0 right-0 w-full h-[140%]"
-      >
+    <section className="relative min-h-[min(92vh,920px)] w-full overflow-hidden bg-navy-deep">
+      <div className="absolute inset-0">
         <Image
-          src="/images/hero-background.jpg"
-          alt="Luxury construction project"
+          src={HERO_IMG}
+          alt="Construction and infrastructure"
           fill
-          className="object-cover"
           priority
-          quality={90}
+          className="object-cover"
+          sizes="100vw"
         />
-        {/* Adaptable Overlay: Fixed dark wash so text remains readable in light mode */}
-        <div className="absolute inset-0 bg-black/40 backdrop-blur-[1px] transition-colors duration-500" />
-      </motion.div>
+        <div className="absolute inset-0 bg-gradient-to-r from-navy-deep/95 via-navy-deep/75 to-navy-deep/25" />
+        <div className="absolute inset-0 bg-gradient-to-t from-navy-deep/90 via-transparent to-navy-deep/40" />
+      </div>
 
-      {/* Content */}
-      <motion.div 
-        style={{ y: contentY, opacity }}
-        className="relative z-10 w-full max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto flex flex-col items-center justify-center text-center mt-20 pb-24"
-      >
-        <div className="flex flex-col items-center space-y-8 w-full">
-          
-          {/* Badge */}
-          <motion.div 
+      <div className="relative z-10 mx-auto flex min-h-[min(92vh,920px)] max-w-[1600px] flex-col justify-end px-4 pb-20 pt-28 sm:px-6 sm:pb-24 lg:px-10 lg:pb-28 lg:pt-32">
+        <div className="max-w-3xl">
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="eyebrow mb-4 text-white/90"
+          >
+            Construction · Rehabilitation · Materials
+          </motion.p>
+          <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary/10 border border-primary/20 rounded-full dark:bg-primary/5 dark:border-primary/10"
+            transition={{ duration: 0.55, delay: 0.05 }}
+            className="font-heading text-4xl font-bold uppercase leading-[1.05] tracking-[0.04em] text-white sm:text-5xl md:text-6xl lg:text-[3.5rem] xl:text-[4rem]"
           >
-            <div className="w-5 h-5 relative">
-              <Image
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/daal%20crown%20bg%20removed-JoSVsbnqjBqVSliTmKYONApuNPXWDZ.png"
-                alt="Logo"
-                fill
-                className="object-contain"
-              />
-            </div>
-            <span className="text-sm font-semibold tracking-wide text-primary">Premium Excellence</span>
-          </motion.div>
-
-          {/* Main Typography */}
-          <div className="space-y-2 md:space-y-4 w-full">
-            <motion.div className="overflow-hidden py-2">
-              <motion.h1 
-                initial={{ y: "110%" }}
-                animate={{ y: 0 }}
-                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                className="font-playfair text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[9rem] font-bold text-white drop-shadow-md leading-[1.1] tracking-tight"
-              >
-                Build The
-              </motion.h1>
-            </motion.div>
-            
-            <motion.div className="overflow-hidden py-2">
-              <motion.h1 
-                initial={{ y: "110%" }}
-                animate={{ y: 0 }}
-                transition={{ duration: 1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className="font-playfair text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[9rem] font-bold text-primary drop-shadow-md leading-[1.1] tracking-tight"
-              >
-                Future
-              </motion.h1>
-            </motion.div>
-            
-            <motion.p 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1, delay: 0.8 }}
-              className="text-base sm:text-lg md:text-xl xl:text-2xl text-white/80 max-w-2xl xl:max-w-3xl mx-auto leading-relaxed mt-8"
+            Doing what demands precision—at scale
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.12 }}
+            className="mt-6 max-w-2xl text-lg leading-relaxed text-white/85 sm:text-xl"
+          >
+            From planning and procurement to safe execution in the field, we help owners deliver iconic work—modeled on
+            the clarity, integration, and delivery discipline of leading EPC organizations.
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.2 }}
+            className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center"
+          >
+            <button suppressHydrationWarning
+              type="button"
+              className="btn-corporate px-8 py-3.5"
+              onClick={() => document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' })}
             >
-              Mastering the art of modern infrastructure, structural rehabilitation, and premium materials designed to stand the test of time.
-            </motion.p>
-          </div>
-
-          {/* Actions */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 1 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8 w-full sm:w-auto"
-          >
-            <button className="w-full sm:w-auto px-8 py-4 bg-primary text-primary-foreground rounded-full font-semibold hover:bg-primary/90 transition-all duration-300">
-              Browse Materials
+              View projects
             </button>
-            <button className="w-full sm:w-auto px-8 py-4 bg-transparent border border-white/20 text-white hover:bg-white/10 rounded-full font-semibold transition-all duration-300">
-              Start Project
+            <button suppressHydrationWarning
+              type="button"
+              className="inline-flex items-center justify-center border border-white/90 bg-transparent px-8 py-3.5 text-sm font-semibold uppercase tracking-wide text-white transition hover:bg-white/10"
+              onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
+            >
+              Talk to our team
             </button>
           </motion.div>
         </div>
-      </motion.div>
 
-      {/* Scroll indicator */}
-      <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 1 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/70 z-20"
-      >
-        <span className="text-xs uppercase tracking-widest font-semibold">Scroll</span>
-        <motion.div 
-          animate={{ y: [0, 8, 0] }}
-          transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
-          className="w-[1px] h-12 bg-primary/50 relative overflow-hidden"
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.8, duration: 0.6 }}
+          className="mt-16 hidden items-center gap-3 text-xs font-semibold uppercase tracking-[0.25em] text-white/55 md:flex"
+          aria-hidden
         >
-          <motion.div 
-            animate={{ y: ["-100%", "100%"] }}
-            transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}
-            className="absolute top-0 w-full h-1/2 bg-primary"
-          />
+          <span className="h-px w-12 bg-white/30" />
+          Scroll to explore
         </motion.div>
-      </motion.div>
+      </div>
     </section>
   )
 }
