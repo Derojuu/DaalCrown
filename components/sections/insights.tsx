@@ -9,19 +9,19 @@ const items = [
     title: 'Mobilizing integrated delivery on complex industrial sites',
     date: 'March 2026',
     image:
-      'https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=900&q=80',
+      'https://plus.unsplash.com/premium_vector-1776152325881-51910381bb61?auto=format&fit=crop&w=900&q=80',
   },
   {
     title: 'Materials strategy: sourcing with certainty and schedule protection',
     date: 'February 2026',
     image:
-      'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=900&q=80',
+      'https://images.unsplash.com/vector-1776389485837-4e4688d49103?auto=format&fit=crop&w=900&q=80',
   },
   {
     title: 'Safety first: how we build predictable outcomes in high-hazard work',
     date: 'January 2026',
     image:
-      'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=900&q=80',
+      'https://plus.unsplash.com/premium_vector-1683141147347-c6aa70127df2?auto=format&fit=crop&w=900&q=80',
   },
 ]
 

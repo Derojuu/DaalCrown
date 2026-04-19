@@ -8,7 +8,7 @@ import About from '@/components/sections/about'
 import PeopleBand from '@/components/sections/people-band'
 import BrandStory from '@/components/sections/brand-story'
 import Legacy from '@/components/sections/legacy'
-import Projects from '@/components/sections/projects'
+//import Projects from '@/components/sections/projects'
 import Testimonials from '@/components/sections/testimonials'
 import Materials from '@/components/sections/materials'
 import CTA from '@/components/sections/cta'
@@ -26,7 +26,7 @@ export default function Home() {
       <PeopleBand />
       <BrandStory />
       <Legacy />
-      <Projects />
+      {/*<Projects />*/}
       <Testimonials />
       <Materials />
       <CTA />

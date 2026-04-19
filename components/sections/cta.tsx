@@ -35,9 +35,10 @@ const CTA = () => {
           </div>
           <div className="space-y-8 border-t border-border pt-10 md:border-l md:border-t-0 md:pl-12 md:pt-0">
             {[
-              { label: 'Email', value: 'info@daalcrown.com' },
-              { label: 'Phone', value: '+1 (555) 123-4567' },
-              { label: 'Headquarters', value: 'Business Hub · Global operations' },
+              { label: 'Email', value: 'odumboadedapo@gmail.com' },
+              { label: 'Phone 1', value: '+234 8028360267' },
+              { label: 'Phone 2', value: '+234 7032345950' },
+              //{ label: 'Headquarters', value: 'Business Hub · Global operations' },
               { label: 'Response time', value: 'Within one business day' },
             ].map((row) => (
               <div key={row.label}>

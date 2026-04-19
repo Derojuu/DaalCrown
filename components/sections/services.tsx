@@ -12,25 +12,25 @@ import SectionHeading from '@/components/common/section-heading'
 const pillars = [
   {
     icon: Compass,
-    title: 'Design & engineering support',
+    title: 'Design, Painting & Rehabilitation',
     body:
       'Collaborative planning, constructability input, and disciplined scope definition—so what we build matches what you approved.',
   },
   {
     icon: Package,
-    title: 'Procurement & materials',
+    title: 'Procurement & Materials',
     body:
-      'Responsible sourcing, schedule-aligned deliveries, and verified quality—backed by our materials marketplace and supplier network.',
+      'Responsible sourcing, schedule-aligned deliveries, and verified quality backed by our materials marketplace and supplier network.',
   },
   {
     icon: HardHat,
-    title: 'Construction execution',
+    title: 'Training & Workshop',
     body:
-      'Field leadership in complex environments: logistics, local coordination, and craft execution with transparent reporting.',
+      'Training, seminar and workshop delivery in complex environments: curriculum design, facilitation, hands-on exercises, participant coordination, and transparent reporting of outcomes.',
   },
   {
     icon: ClipboardList,
-    title: 'Project management',
+    title: 'Project Management',
     body:
       'Integrated controls across safety, cost, and schedule—whether we manage a single phase or the full lifecycle.',
   },

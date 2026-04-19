@@ -6,14 +6,14 @@ import SectionHeading from '@/components/common/section-heading'
 
 const categories = [
   {
-    name: 'Steel & metals',
+    name: 'Training & group discussions',
     detail: 'Structural steel, reinforcement, and fabricated assemblies.',
-    src: 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=900&q=80',
+    src: 'https://images.unsplash.com/vector-1776389485837-4e4688d49103?auto=format&fit=crop&w=900&q=80',
   },
   {
-    name: 'Concrete & aggregates',
+    name: 'Goods & Services',
     detail: 'Cementitious systems, blocks, and tested mixes for performance.',
-    src: 'https://images.unsplash.com/photo-1513467535987-fd81bc7d62f8?auto=format&fit=crop&w=900&q=80',
+    src: 'https://images.unsplash.com/photo-1664455340023-214c33a9d0bd?auto=format&fit=crop&w=900&q=80',
   },
   {
     name: 'Finishes & envelope',
@@ -60,9 +60,9 @@ const Materials = () => {
               <div className="p-6">
                 <h3 className="font-heading text-base font-bold uppercase tracking-[0.08em] text-foreground">{c.name}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{c.detail}</p>
-                <button suppressHydrationWarning type="button" className="mt-5 text-sm font-bold uppercase tracking-[0.14em] text-primary">
+                {/*<button suppressHydrationWarning type="button" className="mt-5 text-sm font-bold uppercase tracking-[0.14em] text-primary">
                   Browse category
-                </button>
+                </button>*/}
               </div>
             </motion.div>
           ))}

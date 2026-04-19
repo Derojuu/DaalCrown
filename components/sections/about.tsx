@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { motion } from 'framer-motion'
 
 const ABOUT_IMG =
-  'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1400&q=80'
+  'https://plus.unsplash.com/premium_vector-1682298456973-875da544933b?auto=format&fit=crop&w=1400&q=80'
 
 const About = () => {
   return (

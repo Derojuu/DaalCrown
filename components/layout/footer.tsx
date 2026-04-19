@@ -51,7 +51,7 @@ const Footer = () => {
                 />
               </div>
               <span className="font-heading text-xl font-bold uppercase tracking-[0.14em] sm:text-2xl">
-                Daal Crown King Ltd
+                DAAL CROWN NIG LTD.
               </span>
             </div>
             <p className="max-w-md text-sm leading-relaxed text-white/75">
@@ -92,7 +92,7 @@ const Footer = () => {
 
         <div className="flex flex-col items-start justify-between gap-6 pt-10 sm:flex-row sm:items-center">
           <p className="text-xs text-white/55">
-            © {year} Daal Crown King Ltd. All rights reserved.
+            © {year} DAAL CROWN NIG LTD. All rights reserved.
           </p>
           <div className="flex flex-wrap items-center gap-6 text-xs font-medium text-white/70">
             <Link href="#" className="hover:text-primary">

@@ -68,7 +68,7 @@ const Navbar = () => {
             <div className="relative h-14 w-14 shrink-0 sm:h-16 sm:w-16">
               <Image
                 src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/daal%20crown%20bg%20removed-JoSVsbnqjBqVSliTmKYONApuNPXWDZ.png"
-                alt="Daal Crown King Ltd"
+                alt="DAAL CROWN NIG LTD"
                 fill
                 className="object-contain"
                 priority
@@ -76,7 +76,7 @@ const Navbar = () => {
               />
             </div>
             <span className="font-heading text-base font-bold uppercase tracking-[0.14em] text-[#30454C] sm:text-lg dark:text-white">
-              Daal Crown
+              Daal Crown NIG LTD.
             </span>
           </Link>
 
