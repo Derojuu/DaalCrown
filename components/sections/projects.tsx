@@ -11,7 +11,7 @@ const projects = [
     title: 'Metro mobility program',
     place: 'Middle East',
     image:
-      'https://images.unsplash.com/photo-1544984241-ec57ea16fe25?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1556695736-d287caebc48e?auto=format&fit=crop&w=1200&q=80',
     detail: 'Large-scale transit infrastructure delivered with integrated systems commissioning.',
   },
   {

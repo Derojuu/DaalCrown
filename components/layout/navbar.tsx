@@ -107,9 +107,7 @@ const Navbar = () => {
             >
               <Search className="h-[18px] w-[18px]" strokeWidth={2} />
             </button>
-            <div className="hidden sm:block">
-              <ThemeToggle />
-            </div>
+            <ThemeToggle />
             <button
               suppressHydrationWarning
               type="button"
@@ -178,10 +176,6 @@ const Navbar = () => {
                 >
                   Contact
                 </button>
-                <div className="mt-4 flex items-center justify-between border-t border-border pt-4">
-                  <span className="text-xs text-muted-foreground">Display</span>
-                  <ThemeToggle />
-                </div>
               </nav>
             </motion.div>
           </>
